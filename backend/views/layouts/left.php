@@ -67,7 +67,7 @@
                 ],
             ]
         ) ?>
-        <ul class="sidebar-menu">
+       <!-- <ul class="sidebar-menu">
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-gears"></i> <span>权限控制</span>
@@ -94,7 +94,7 @@
                     </li>
                 </ul>
             </li>
-        </ul>
+        </ul>-->
         <?php
         $callback = function($menu){
             $data = json_decode($menu['data'], true);
