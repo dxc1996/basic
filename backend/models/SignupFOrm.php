@@ -44,7 +44,7 @@ class SignupForm extends Model
             // 下面的规则基本上都同上，不解释了
 
             ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required', 'message' => '邮箱不可以唯恐'],
+            ['email', 'required', 'message' => '邮箱不可以为空'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\backend\models\UserBackend', 'message' => 'email已经被设置了.'],
