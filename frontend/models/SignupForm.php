@@ -12,8 +12,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-
-
+    public $rePassword;
+    public $verifyCode;
     /**
      * @inheritdoc
      */
@@ -31,8 +31,24 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            ['password','rePassword', 'required'],
+            ['password', 'rePassword','string', 'min' => 6],
+            ['verifyCode','captcha'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username'=>'用户名',
+            //yii::t('common','username')
+            'email'=>'邮箱',
+            'password'=>'密码',
+            'rePassword'=>'重复密码',
+            'verifyCode'=>'验证码',
         ];
     }
 
