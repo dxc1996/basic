@@ -31,9 +31,8 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
-            ['password','rePassword', 'required'],
-            ['password', 'rePassword','string', 'min' => 6],
-            ['verifyCode','captcha'],
+            [['password','rePassword'], 'required'],
+            [['password','rePassword'], 'string', 'min' => 6],
         ];
     }
 
@@ -47,8 +46,6 @@ class SignupForm extends Model
             //yii::t('common','username')
             'email'=>'邮箱',
             'password'=>'密码',
-            'rePassword'=>'重复密码',
-            'verifyCode'=>'验证码',
         ];
     }
 
