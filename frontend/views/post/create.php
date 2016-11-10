@@ -32,7 +32,13 @@ $this->params['breadcrumbs'][]=$this->title;
             ]) ?>
 
 
-            <?=$form->field($model,'content')->textInput(['maxlength'=>true])?>
+            <?= $form->field($model, 'content')->widget('common\widgets\ueditor\Ueditor',[
+                'options'=>[
+                    'initialFrameWidth' => 400,
+                   /* 'toolbars'=>[],*/
+
+                ]
+            ]) ?>
             <?=$form->field($model,'tags')->textInput(['maxlength'=>true])?>
 
             <div class="form-group">
