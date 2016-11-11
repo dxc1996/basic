@@ -10,6 +10,7 @@
  */
 namespace frontend\models;
 
+use common\models\Posts;
 use Yii;
 use yii\base\Model;
 
@@ -70,8 +71,22 @@ class PostsForm extends Model
     public function create()
     {
         //事务
-        $transaction = \Yii::$app->db->beginTransaction();
+        $transaction = Yii::$app->db->beginTransaction();
         try{
+            $model = new Posts();
+            $model->setAttribute($this->attributes);
+            $model->summary = $this->_getSummary();
+            $model->uer_id = Yii::$app->user->identity->id;
+            $model->user_name = Yii::$app->user->identity->username;
+            $model->created_at = time();
+            $model->updated_at = time();
+            if(!$model->save())
+                throw new \Exception('文章保存失败');
+
+            $this->id=$model->id;
+
+            //调用事件
+           $this->_evebtAfterCreate();
 
             $transaction->commit();
             return true;

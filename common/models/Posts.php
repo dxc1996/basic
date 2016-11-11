@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\base\BaseModel;
 use Yii;
 
 /**
@@ -19,7 +20,7 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Posts extends \yii\db\ActiveRecord
+class Posts extends BaseModel
 {
     /**
      * @inheritdoc
