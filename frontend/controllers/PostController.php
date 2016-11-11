@@ -51,6 +51,8 @@ class PostController extends BaseController
     public function actionCreate()
     {
         $model = new PostsForm();
+        //定义场景
+        $model->setScenario(PostsForm::SCENARIO_CREATE);
         $cat = Cats::getAllCats();
         return $this->render('create',['model'=>$model,'cat'=>$cat]);
     }

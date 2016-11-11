@@ -10,6 +10,7 @@
  */
 namespace frontend\models;
 
+use Yii;
 use yii\base\Model;
 
 class PostsForm extends Model
@@ -20,8 +21,24 @@ class PostsForm extends Model
     public $label_img;
     public $cat_id;
     public $tags;
+
     public $_lastError = '';
 
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPDATE = 'update';
+
+    /**
+     * 场景设置
+     * @return array
+     */
+    public function scenarios()
+    {
+        $scenarios = [
+            self::SCENARIO_CREATE=>['title','content','label_img','cat_id','tags'],
+            self::SCENARIO_UPDATE=>['title','content','label_img','cat_id','tags'],
+        ];
+        return array_merge(parent::scenarios(),$scenarios);
+    }
     public function rules()
     {
         return [
@@ -48,5 +65,21 @@ class PostsForm extends Model
     public function setBehaviors($behaviors)
     {
         $this->behaviors = $behaviors;
+    }
+
+    public function create()
+    {
+        //事务
+        $transaction = \Yii::$app->db->beginTransaction();
+        try{
+
+            $transaction->commit();
+            return true;
+        }catch(\Exception $e){
+            $transaction->rollBack();
+            $this->_lastError = $e->getMessage();
+
+        }
+
     }
 }

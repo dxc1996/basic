@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][]=$this->title;
 
             <?= $form->field($model, 'content')->widget('common\widgets\ueditor\Ueditor',[
                 'options'=>[
-                    'initialFrameWidth' => 400,
+                    'initialFrameWidth' => 800,
                    /* 'toolbars'=>[],*/
 
                 ]
