@@ -24,10 +24,17 @@ class PostsForm extends Model
     public $tags;
 
     public $_lastError = '';
-
+    /**
+     * 定义场景
+     */
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';
 
+    /**
+     *定义事件
+     */
+    const EVENT_AFTER_CREATE = 'evebtAfterCreate';
+    const EVENT_AFTER_UPDATE = 'evebtAfterUpdate';
     /**
      * 场景设置
      * @return array
@@ -87,7 +94,8 @@ class PostsForm extends Model
             $this->id=$model->id;
 
             //调用事件
-           $this->_eventAfterCreate();
+            $data = array_merge($this->getAttributes(),$model->getAttributes());
+           $this->_eventAfterCreate($data);
 
             $transaction->commit();
             return true;
@@ -114,10 +122,23 @@ class PostsForm extends Model
         return (mb_substr(str_replace('&nbsp;','',strip_tags($this->content)),$s,$e,$char));
     }
 
+
     /**
      * 创建完成后调用
+     * @param $data
      */
-    public function _eventAfterCreate()
+    public function _eventAfterCreate($data)
+    {
+        $this->on(self::EVENT_AFTER_CREATE,[$this,'_eventAddTag'],$data);
+//        $this->on(self::EVENT_AFTER_UPDATE,[$this,'_eventAddOne'],$data);
+        //触发事件
+        $this->trigger(self::EVENT_AFTER_CREATE);
+    }
+
+    /**
+     * 添加标签
+     */
+    public function _eventAddTag()
     {
 
     }
