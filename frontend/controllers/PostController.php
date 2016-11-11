@@ -53,6 +53,7 @@ class PostController extends BaseController
         $model = new PostsForm();
         //定义场景
         $model->setScenario(PostsForm::SCENARIO_CREATE);
+
         if($model->load(Yii::$app->request->post()) && $model->validate()){
             if(!$model->create()){
                 Yii::$app->session->setFlash('warning',$model->_lastError);
