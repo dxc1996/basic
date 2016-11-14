@@ -5,3 +5,5 @@
  * Date: 2016/11/10
  * Time: 13:24
  */
+?>
+<?=\frontend\widgets\post\PostWidget::widget();?>

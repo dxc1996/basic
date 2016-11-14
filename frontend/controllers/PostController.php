@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use common\models\Cats;
+use common\models\PostExtends;
 use Yii;
 use frontend\controllers\base\BaseController;
 use frontend\models\PostsForm;
@@ -66,6 +67,7 @@ class PostController extends BaseController
         ];
     }
     /**
+     * 文章列表
      * @return string
      */
     public function  actionIndex()
@@ -104,6 +106,9 @@ class PostController extends BaseController
     {
         $model = new PostsForm();
         $data = $model->getViewById($id);
+        //文章统计
+        $model = new PostExtends();
+        $model->upCounter(['post_id'=>$id],'browser',1);
         return $this->render('view',['data'=>$data]);
     }
 }
