@@ -173,7 +173,14 @@ class PostsForm extends Model
         if(!$res){
             throw new NotFoundHttpException('文章不存在');
         }
-        echo '<pre>';
-        var_dump($res);
+        $res['tags'] = [];
+        if(isset($res['relate'])&& !empty($res['relate']))
+        {
+            foreach($res['relate'] as $list){
+                $res['tags'][] = $list['tag']['tag_name'];
+            }
+        }
+        unset($res['relate']);
+        return $res;
     }
 }
