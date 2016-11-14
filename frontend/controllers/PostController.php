@@ -11,9 +11,38 @@ use common\models\Cats;
 use Yii;
 use frontend\controllers\base\BaseController;
 use frontend\models\PostsForm;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 class PostController extends BaseController
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create','upload','ueditor'],
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['create','upload','ueditor'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    '*' =>['get','post'],
+
+                ],
+            ],
+        ];
+    }
     /**
      * @return array
      */
@@ -63,5 +92,18 @@ class PostController extends BaseController
         }
         $cat = Cats::getAllCats();
         return $this->render('create',['model'=>$model,'cat'=>$cat]);
+    }
+
+    /**
+     * 文章详情
+     * @param $id
+     * @return string
+     * @throws \yii\web\NotFoundHttpException
+     */
+    public function actionView($id)
+    {
+        $model = new PostsForm();
+        $data = $model->getViewById($id);
+        return $this->render('view',['data'=>$data]);
     }
 }

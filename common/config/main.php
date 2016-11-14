@@ -7,7 +7,7 @@ return [
             "enablePrettyUrl" => true,
             "enableStrictParsing" => false,
             "showScriptName" => false,
-            "suffix"=>".html",
+            "suffix"=>"",
             "rules" => [
                 "<controller:\w+>/<id:\d+>"=>"<controller>/view",
                 "<controller:\w+>/<action:\w+>"=>"<controller>/<action>"

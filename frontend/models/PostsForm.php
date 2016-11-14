@@ -11,8 +11,11 @@
 namespace frontend\models;
 
 use common\models\Posts;
+use common\models\RelationPostTags;
 use Yii;
 use yii\base\Model;
+use yii\db\Query;
+use yii\web\NotFoundHttpException;
 
 class PostsForm extends Model
 {
@@ -95,8 +98,7 @@ class PostsForm extends Model
 
             //调用事件
             $data = array_merge($this->getAttributes(),$model->getAttributes());
-           $this->_eventAfterCreate($data);
-
+            $this->_eventAfterCreate($data);
             $transaction->commit();
             return true;
         }catch(\Exception $e){
@@ -130,7 +132,7 @@ class PostsForm extends Model
     public function _eventAfterCreate($data)
     {
         $this->on(self::EVENT_AFTER_CREATE,[$this,'_eventAddTag'],$data);
-//        $this->on(self::EVENT_AFTER_UPDATE,[$this,'_eventAddOne'],$data);
+//        $this->on(self::EVENT_AFTER_UPDAT-E,[$this,'_eventAddOne'],$data);
         //触发事件
         $this->trigger(self::EVENT_AFTER_CREATE);
     }
@@ -138,8 +140,40 @@ class PostsForm extends Model
     /**
      * 添加标签
      */
-    public function _eventAddTag()
+    public function _eventAddTag($event)
     {
+        $tag = new TagForm();
+        $tag->tags = $event->data['tags'];
+        $tagids = $tag->saveTags();
+        //删除原先的关联关系
+        RelationPostTags::deleteAll(['post_id'=>$event->data['id']]);
+        //批量保存文章和标签的关联关系
+        if(!empty($tagids)){
+            foreach ($tagids as $k => $id){
+                $row[$k]['post_id'] = $this->id;
+                $row[$k]['tag_id'] = $id;
+            }
 
+            $res=(new Query())->createCommand()->batchInsert(RelationPostTags::tableName(),['post_id','tag_id'],$row)
+                ->execute();
+
+            if(!$res)
+                throw new \Exception('保存失败');
+        }
+    }
+
+    /**
+     * 获取文章
+     * @param $id
+     * @throws NotFoundHttpException
+     */
+    public function getViewById($id)
+    {
+        $res = Posts::find()->with('relate.tag')->where(['id'=>$id])->asArray()->one();
+        if(!$res){
+            throw new NotFoundHttpException('文章不存在');
+        }
+        echo '<pre>';
+        var_dump($res);
     }
 }

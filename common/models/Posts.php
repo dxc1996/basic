@@ -33,6 +33,13 @@ class Posts extends BaseModel
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRelate()
+    {
+        return $this->hasMany(RelationPostTags::className(),['post_id'=>'id']);
+    }
+    /**
      * @inheritdoc
      */
     public function rules()

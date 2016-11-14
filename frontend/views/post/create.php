@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][]=$this->title;
 
                 ]
             ]) ?>
-            <?=$form->field($model,'tags')->textInput(['maxlength'=>true])?>
+            <?=$form->field($model,'tags')->widget('common\widgets\tags\TagWidget')?>
 
             <div class="form-group">
                 <?=\yii\bootstrap\Html::submitButton('发布',['class'=>'btn btn-success'])?>
