@@ -184,12 +184,12 @@ class PostsForm extends Model
         return $res;
     }
 
-    public function getList($cond,$curPage=1,$pageSize = 5,$orderBy=['id'=>SORT_DESC])
+    public static function getList($cond,$curPage=1,$pageSize = 5,$orderBy=['id'=>SORT_DESC])
     {
         $model= new Posts();
         //查询语句
         $select = ['id','title','summary','label_img','cat_id','user_id','user_name',
-            'is_valid','created_at','update_at'];
+            'is_valid','created_at'];
         $query = $model->find()->select($select)->where($cond)->with('relate.tag','extend')
             ->orderBy($orderBy);
 

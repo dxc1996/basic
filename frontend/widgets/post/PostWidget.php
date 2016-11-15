@@ -27,7 +27,7 @@ class PostWidget extends Widget
      * 显示条数
      * @var int
      */
-    public $limit = 6;
+    public $limit = 5;
     /**
      * 是否显示更多
      * @var bool
@@ -37,8 +37,11 @@ class PostWidget extends Widget
      * 是否显示分页
      * @var bool
      */
-    public $page = false;
+    public $page = true;
 
+    /**
+     * @return string
+     */
     public function run()
     {
         $curPage = Yii::$app->request->get('page',1);
@@ -49,7 +52,7 @@ class PostWidget extends Widget
         $result['more'] =Url::to(['post/index']);
         $result['body'] = $res['data'] ? $res['data'] :[];
         if($this->page){
-            $pages = new Pagination(['totalCount'=>$res['count'],'pageSize'=>$res['pagesize']]);
+            $pages = new Pagination(['totalCount'=>$res['count'],'pageSize'=>$res['pageSize']]);
             $result['page'] = $pages;
         }
 

@@ -15,6 +15,14 @@ use yii\db\ActiveRecord;
  */
 class BaseModel extends ActiveRecord
 {
+    /**
+     * 获取分页数据
+     * @param $query
+     * @param int $curPage
+     * @param int $pageSize
+     * @param null $search
+     * @return array
+     */
     public function getPages($query,$curPage=1,$pageSize = 10,$search=null)
     {
         if($search){
