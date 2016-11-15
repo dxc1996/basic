@@ -19,7 +19,7 @@ use yii\widgets\LinkPager;
                         </a>
                     </div>
                     <div class="col-lg-8 btn-group">
-                        <h1><a href="<?=Url::to(['post/detail','id'=>$list['id']])?>"><?=$list['title']?></a></h1>
+                        <h1><a href="<?=Url::to(['post/view','id'=>$list['id']])?>"><?=$list['title']?></a></h1>
                     <span class="post-tags">
                         <span class="glyphicon glyphicon-user"></span><a href="<?=Url::to(['member/index','id'=>$list['user_id']])?>"><?=$list['user_name']?></a>&nbsp;
                         <span class="glyphicon glyphicon-time"></span><?=date('Y-m-d',$list['created_at'])?>&nbsp;

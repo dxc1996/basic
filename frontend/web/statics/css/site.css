@@ -183,6 +183,7 @@ css新增*/
     border-bottom: 1px solid #eee;
     margin-bottom: 10px;
     min-height: 400px;
+    padding-top: 100px;
 }
 .select2-container--default .select2-selection--multiple {
     background-color: white;

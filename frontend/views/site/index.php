@@ -8,9 +8,14 @@ $this->title = '博客-首页';
 
 <div class="row">
     <div class="col-lg-9">
-1111
+        <?=BannerWidget::widget([])?>
     </div>
     <div class="col-lg-3">
-222
+        safjkahdjkahjhfjsh
+    </div>
+    <div class="row">
+            <div class="col-lg-9">
+                <?=\frontend\widgets\post\PostWidget::widget();?>
+            </div>
     </div>
 </div>

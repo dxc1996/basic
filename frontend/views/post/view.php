@@ -17,7 +17,10 @@ $this->params['breadcrumbs'][]=$this->title;
             <span>发布:<?=date('Y-m-d',$data['created_at']); ?></span>
             <span>浏览:<?=isset($data['extend']['browser'])?$data['extend']['browser']:0 ?>次</span>
         </div>
-    <?=$data['content'] ?>
+    <div class="page-content" style="">
+        <?=$data['content'] ?>
+    </div>
+
     <div class="page-tag">
         标签:
             <?php foreach($data['tags'] as $tag): ?>
