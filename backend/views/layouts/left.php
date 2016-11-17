@@ -30,7 +30,7 @@
         </form>
         <!-- /.search form -->
 
-        <?= dmstr\widgets\Menu::widget(
+        <?/*= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
@@ -66,7 +66,7 @@
                     ],
                 ],
             ]
-        ) ?>
+        ) */?>
        <!-- <ul class="sidebar-menu">
             <li class="treeview">
                 <a href="#">
