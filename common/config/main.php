@@ -3,6 +3,7 @@ return [
     'language' => 'zh-CN',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
+        //路由美化
         "urlManager" => [
             "enablePrettyUrl" => true,
             "enableStrictParsing" => false,
@@ -13,6 +14,7 @@ return [
                 "<controller:\w+>/<action:\w+>"=>"<controller>/<action>"
             ]
         ],
+        //语言包
         'i18n' =>[
             'translations'=>[
                 '*'=>[

@@ -18,10 +18,12 @@ return [
         "admin" => "mdm\admin\Module",
     ],
     'components' => [
+        //rbac权限配置
         "authManager" => [
             "class" => 'yii\rbac\DbManager', //这里记得用单引号而不是双引号
             "defaultRoles" => ["guest"],
         ],
+        //路由美化
         "urlManager" => [
             "enablePrettyUrl" => true,
             "enableStrictParsing" => false,
@@ -35,6 +37,7 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        //登录model   注册identityClass
         'user' => [
             'identityClass' => 'backend\models\UserBackend',
             'enableAutoLogin' => true,
@@ -67,7 +70,7 @@ return [
     ],
     'params' => $params,
     'as access' => [
-        //ACF肯定是要加的，因为粗心导致该配置漏掉了，很是抱歉
+        //ACF
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             //这里是允许访问的action
