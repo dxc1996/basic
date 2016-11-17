@@ -25,6 +25,7 @@ return [
                 ],
             ],
         ],
+        //缓存
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
